@@ -69,6 +69,13 @@ function check_product()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
+
+    if (echo -n $1 | grep -q -e "^solo_") ; then
+       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^solo_//g')
+    else
+       CUSTOM_BUILD=
+    fi
+    export CUSTOM_BUILD
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
         TARGET_BUILD_TYPE= \
@@ -1525,7 +1532,6 @@ fi
 for f in `test -d device && find -L device -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort` \
          `test -d vendor && find -L vendor -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort`
 do
-    echo "including $f"
     . $f
 done
 unset f

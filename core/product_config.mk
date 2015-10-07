@@ -184,10 +184,16 @@ ifneq ($(strip $(TARGET_BUILD_APPS)),)
 all_product_configs := $(call get-product-makefiles,\
     $(SRC_TARGET_DIR)/product/AndroidProducts.mk)
 else
-# Read in all of the product definitions specified by the AndroidProducts.mk
-# files in the tree.
-all_product_configs := $(get-all-product-makefiles)
-endif
+ifneq ($(CUSTOM_BUILD),)
+    all_product_configs := $(shell ls vendor/solo/products/nexus_$(CUSTOM_BUILD).mk)
+  else
+    # Read in all of the product definitions specified by the AndroidProducts.mk
+    # files in the tree.
+    all_product_configs := $(get-all-product-makefiles)
+  endif
+ endif
+ 
+ifeq ($(CUSTOM_BUILD),)
 
 # Find the product config makefile for the current product.
 # all_product_configs consists items like:
@@ -210,6 +216,10 @@ $(foreach f, $(all_product_configs),\
 _cpm_words :=
 _cpm_word1 :=
 _cpm_word2 :=
+else
+    current_product_makefile := $(strip $(all_product_configs))
+    all_product_makefiles := $(strip $(all_product_configs))
+endif
 current_product_makefile := $(strip $(current_product_makefile))
 all_product_makefiles := $(strip $(all_product_makefiles))
 
