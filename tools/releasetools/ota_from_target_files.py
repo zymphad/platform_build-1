@@ -606,9 +606,17 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   #script.Print("Target: %s" % CalculateFingerprint(
   #    oem_props, oem_dict, OPTIONS.info_dict))
-  script.Print("********************")
-  script.Print("**   Pure NeXus   **")
-  script.Print("********************")
+  script.Print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+  script.Print("                                          ")
+  script.Print("      ________           __               ")
+  script.Print("     |   ___  |         |  |              ")
+  script.Print("     |  /___\_|  _____  |  |  _____       ")
+  script.Print("     |____   \  /     \ |  | /     \      ")
+  script.Print("          |  |  |  |  | |  | |  |  |      ")
+  script.Print("     |\___/  |  |  |  | |  | |  |  |      ")
+  script.Print("     |_______/  \_____/ |__| \_____/      ")
+  script.Print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+  script.Print(" ")
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()

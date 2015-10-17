@@ -1607,7 +1607,27 @@ endif
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
-
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
+	@echo -e ""
+	@echo -e "${cya}Building ${bldcya}Solo ${txtrst}";
+	@echo -e ""
+	@echo -e ${CL_CYN}"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	@echo -e ${CL_MAG}"                                          "
+	@echo -e ${CL_MAG}"      ________           __               "
+	@echo -e ${CL_MAG}"     |   ___  |         |  |              "
+	@echo -e ${CL_MAG}"     |  /___\_|  _____  |  |  _____       "
+	@echo -e ${CL_MAG}"     |____   \  /     \ |  | /     \      "
+	@echo -e ${CL_MAG}"          |  |  |  |  | |  | |  |  |      "
+	@echo -e ${CL_MAG}"     |\___/  |  |  |  | |  | |  |  |      "
+	@echo -e ${CL_MAG}"     |_______/  \_____/ |__| \_____/      "
+	@echo -e ${CL_CYN}"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	@echo -e ""
+	@echo -e ${CL_CYN}"zip: "${CL_MAG} $(CUSTOM_TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_CYN}"md5: "${CL_MAG}" `cat $(CUSTOM_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"size:"${CL_MAG}" `ls -lah $(CUSTOM_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
+	@echo -e ${CL_CYN}"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"${CL_RST}
+	@echo -e ""
 endif    # recovery_fstab is defined
 endif    # TARGET_NO_KERNEL != true
 endif    # TARGET_DEVICE != generic*
