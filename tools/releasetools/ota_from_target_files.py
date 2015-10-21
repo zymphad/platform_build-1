@@ -606,16 +606,16 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   #script.Print("Target: %s" % CalculateFingerprint(
   #    oem_props, oem_dict, OPTIONS.info_dict))
-  script.Print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-  script.Print("                                          ")
-  script.Print("      ________           __               ")
-  script.Print("     |   ___  |         |  |              ")
-  script.Print("     |  /___\_|  _____  |  |  _____       ")
-  script.Print("     |____   \  /     \ |  | /     \      ")
-  script.Print("          |  |  |  |  | |  | |  |  |      ")
-  script.Print("     |\___/  |  |  |  | |  | |  |  |      ")
-  script.Print("     |_______/  \_____/ |__| \_____/      ")
-  script.Print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+  script.Print("-----------------------------------------------------------")
+  script.Print("        / AAAAAA  / OOOOOO   /ssssss /ii| /PPPPPP          ")
+  script.Print("       / AA__  AA/ OO__  OO /SS__ SS||__/| PP__ PP         ")
+  script.Print("       | AA  \ AA| OO  \ OO| SS  \__/ /ii| PP  \ PP        ")
+  script.Print("       | AAAAAAAA| OO  | OO|  SSSSSS | ii| PPPPPPP/        ")
+  script.Print("       | AA__  AA| OO  | OO \____  SS| ii| PP____/         ")
+  script.Print("       | AA  | AA| OO  | OO /SS  \ SS| ii| PP              ")
+  script.Print("       | AA  | AA|  OOOOOO/| SSSSSS/ | ii| PP              ")
+  script.Print("       |__/  |__/ \______/  \______/ |__/|__/              ")
+  script.Print("-----------------------------------------------------------")
   script.Print(" ")
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
@@ -628,6 +628,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.backuptool:
     script.Mount("/system")
+    script.Print("Running backup tool...")
     script.RunBackup("backup")
     script.Unmount("/system")
 
@@ -706,7 +707,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.ShowProgress(0.02, 10)
 
     if block_based:
-    script.Mount("/system")
+    	script.Mount("/system")
+        script.Print("Restoring system...")
     script.RunBackup("restore")
 
     if block_based:

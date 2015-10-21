@@ -70,8 +70,8 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^solo_") ; then
-       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^solo_//g')
+    if (echo -n $1 | grep -q -e "^aosip_") ; then
+       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^aosip_//g')
     else
        CUSTOM_BUILD=
     fi
@@ -529,7 +529,7 @@ function breakfast()
     target=$1
     CUSTOM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
-    for f in `/bin/ls vendor/solo/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/aosip/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -545,8 +545,11 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the solo model name
-            lunch solo_$target-userdebug
+            # This is probably just the nexus model name
+            if [ -z "$variant" ]; then
+                variant="userdebug"
+            fi
+            lunch aosip_$target-$variant
         fi
     fi
     return $?

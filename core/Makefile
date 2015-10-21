@@ -1599,10 +1599,8 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	   --backup=$(backuptool) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
-ifneq ($(TARGET_CUSTOM_RELEASETOOL),)
-	@echo "Running releasetool"
-	$(TARGET_CUSTOM_RELEASETOOL)
-endif
+
+CUSTOM_TARGET_PACKAGE := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-$(AOSIP_VERSION).zip
 
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
@@ -1610,18 +1608,18 @@ bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
 	@echo -e ""
-	@echo -e "${cya}Building ${bldcya}Solo ${txtrst}";
+	@echo -e "${cya}Building ${bldcya}AOSiP ${txtrst}";
 	@echo -e ""
-	@echo -e ${CL_CYN}"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-	@echo -e ${CL_MAG}"                                          "
-	@echo -e ${CL_MAG}"      ________           __               "
-	@echo -e ${CL_MAG}"     |   ___  |         |  |              "
-	@echo -e ${CL_MAG}"     |  /___\_|  _____  |  |  _____       "
-	@echo -e ${CL_MAG}"     |____   \  /     \ |  | /     \      "
-	@echo -e ${CL_MAG}"          |  |  |  |  | |  | |  |  |      "
-	@echo -e ${CL_MAG}"     |\___/  |  |  |  | |  | |  |  |      "
-	@echo -e ${CL_MAG}"     |_______/  \_____/ |__| \_____/      "
-	@echo -e ${CL_CYN}"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	@echo -e ${CL_CYN}"-----------------------------------------------------------"
+	@echo -e ${CL_MAG}"        / AAAAAA  / OOOOOO   /ssssss /ii| /PPPPPP          "
+	@echo -e ${CL_MAG}"       / AA__  AA/ OO__  OO /SS__ SS||__/| PP__ PP         "
+	@echo -e ${CL_MAG}"       | AA  \ AA| OO  \ OO| SS  \__/ /ii| PP  \ PP        "
+	@echo -e ${CL_MAG}"       | AAAAAAAA| OO  | OO|  SSSSSS | ii| PPPPPPP/        "
+	@echo -e ${CL_MAG}"       | AA__  AA| OO  | OO \____  SS| ii| PP____/         "
+	@echo -e ${CL_MAG}"       | AA  | AA| OO  | OO /SS  \ SS| ii| PP              "
+	@echo -e ${CL_MAG}"       | AA  | AA|  OOOOOO/| SSSSSS/ | ii| PP              "
+	@echo -e ${CL_MAG}"       |__/  |__/ \______/  \______/ |__/|__/              "
+	@echo -e ${CL_CYN}"-----------------------------------------------------------"
 	@echo -e ""
 	@echo -e ${CL_CYN}"zip: "${CL_MAG} $(CUSTOM_TARGET_PACKAGE)${CL_RST}
 	@echo -e ${CL_CYN}"md5: "${CL_MAG}" `cat $(CUSTOM_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
