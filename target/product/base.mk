@@ -51,7 +51,6 @@ PRODUCT_PACKAGES += \
     libcamera_client \
     libcameraservice \
     libdl \
-    libdrmclearkeyplugin \
     libeffectproxy \
     libeffects \
     libinput \
