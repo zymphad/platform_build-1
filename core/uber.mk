@@ -97,7 +97,7 @@ LOCAL_DISABLE_STRICT := \
 	libc_nomalloc \
 	linker \
 	sensors.flounder \
-	libnvvisualizer
+	libnvvisualizer \
 	libskia \
 	libiprouteutil
 
